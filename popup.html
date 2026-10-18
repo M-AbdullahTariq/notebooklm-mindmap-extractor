@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NotebookLM Mindmap Extractor</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-brand">
+        <span class="header-icon">🗺️</span>
+        <span class="header-title">NotebookLM Exporter</span>
+      </div>
+      <div class="header-badges">
+        <span class="version-badge">v2.1.1</span>
+        <span id="statusDot" class="status-dot" title="Checking page connection..."></span>
+      </div>
+    </header>
+
+    <!-- Page Status Message Banner -->
+    <div id="statusBanner" class="status-banner">
+      <span>🔄 Checking active NotebookLM tab...</span>
+    </div>
+
+    <!-- Detected Mindmap Information Card -->
+    <div id="mindmapCard" class="card" style="display: none;">
+      <div class="topic-header">Detected Mindmap</div>
+      <div id="topicTitle" class="topic-title" title="Topic title">Scanning...</div>
+      <div class="stats-row">
+        <span id="statNodes" class="stat-pill primary">0 nodes</span>
+        <span id="statDepth" class="stat-pill">Depth: 0</span>
+        <span id="statMethod" class="stat-pill success">D3 Memory</span>
+      </div>
+    </div>
+
+    <!-- Auto-Expansion & Formatting Options -->
+    <div id="optionsCard" class="card" style="display: none;">
+      <div class="field-group">
+        <label for="formatSelector" class="field-label">Export Format</label>
+        <select id="formatSelector" class="format-select">
+          <option value="canvas" selected>🔮 Obsidian Canvas (.canvas) ★</option>
+          <option value="markdown">📝 Markdown / Whimsical (.md)</option>
+          <option value="freemind">🧠 FreeMind / XMind (.mm)</option>
+          <option value="opml">📋 OPML 2.0 (.opml)</option>
+          <option value="json">📊 JSON Tree (.json)</option>
+          <option value="csv">📑 CSV Table (.csv)</option>
+        </select>
+      </div>
+
+      <div class="options-row" style="margin-top: 10px;">
+        <label class="checkbox-label" title="Automatically click collapsed > nodes to capture the complete tree">
+          <input type="checkbox" id="autoExpandCheck" checked />
+          <span>Auto-expand collapsed branches</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Extraction Progress Indicator -->
+    <div id="progressContainer" class="progress-container">
+      <div id="progressText" class="progress-text">
+        <span>🔄 Expanding branches & reading D3 tree...</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill"></div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div id="actionsContainer" class="actions" style="display: none;">
+      <button id="downloadBtn" class="btn btn-primary">
+        <span>📥 Download Obsidian Canvas (.canvas)</span>
+      </button>
+      <button id="copyBtn" class="btn btn-secondary">
+        <span>📋 Copy to Clipboard</span>
+      </button>
+      <button id="rescanBtn" class="btn btn-ghost">
+        🔄 Re-scan Mindmap
+      </button>
+    </div>
+
+    <!-- Transient Toast Notification -->
+    <div id="toast" class="toast"></div>
+  </div>
+
+  <!-- Pure Layout & Serializer Scripts -->
+  <script src="scripts/layout.js"></script>
+  <script src="scripts/serializer.js"></script>
+  <!-- Main Popup Controller -->
+  <script src="popup.js"></script>
+</body>
+</html>

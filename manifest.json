@@ -1,0 +1,78 @@
+{
+  "manifest_version": 3,
+  "name": "NotebookLM Mindmap Extractor to Obsidian Canvas",
+  "version": "2.1.1",
+  "description": "Export Google NotebookLM mindmaps to Obsidian Canvas (.canvas), Markdown, FreeMind, OPML, JSON, and CSV.",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "downloads",
+    "clipboardWrite",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://notebooklm.google.com/*",
+    "https://notebook.google.com/*",
+    "https://*.scf.usercontent.goog/*",
+    "https://*.usercontent.goog/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "NotebookLM Mindmap Extractor",
+    "default_icon": {
+      "16": "icon16.png",
+      "32": "icon32.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://notebooklm.google.com/*",
+        "https://notebook.google.com/*",
+        "https://*.scf.usercontent.goog/*",
+        "https://*.usercontent.goog/*"
+      ],
+      "js": ["content.js"],
+      "all_frames": true,
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://notebooklm.google.com/*",
+        "https://notebook.google.com/*",
+        "https://*.scf.usercontent.goog/*",
+        "https://*.usercontent.goog/*"
+      ],
+      "js": ["scripts/extractor.js"],
+      "world": "MAIN",
+      "all_frames": true,
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "scripts/extractor.js",
+        "scripts/layout.js",
+        "scripts/serializer.js"
+      ],
+      "matches": [
+        "https://notebooklm.google.com/*",
+        "https://notebook.google.com/*",
+        "https://*.scf.usercontent.goog/*",
+        "https://*.usercontent.goog/*"
+      ]
+    }
+  ]
+}
